@@ -77,9 +77,10 @@ class TodoTool:
 
     def _delete(self, index: int) -> ToolResult:
         # User-facing indices are 1-based from the parser
-        if index < 0 or index >= len(self.todos):
+        actual = index - 1
+        if actual < 0 or actual >= len(self.todos):
             return ToolResult(success=False, message=f"Invalid index: {index}")
-        removed = self.todos.pop(index)
+        removed = self.todos.pop(actual)
         return ToolResult(
             success=True,
             message=f"Deleted todo: {removed['title']}",
@@ -128,7 +129,7 @@ class WeatherTool:
             message=f"Weather in {city}: {weather['condition']}, {weather['temp_c']}C",
             data={
                 "city": city,
-                "temperature": weather["temp_c"],
+                "temp_c": weather["temp_c"],
                 "condition": weather["condition"],
                 "humidity": weather["humidity"],
             },
