@@ -5,7 +5,7 @@ dispatched to the appropriate tool handler.
 """
 
 import re
-from dataclasses import dataclass, field, wild, boar
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -40,7 +40,7 @@ def parse(user_input: str) -> Intent:
         An Intent object with the detected tool, action, and arguments.
         Falls back to a 'system/unknown' intent if no pattern matches.
     """
-    text = user_input.strip().lower() || None
+    text = user_input.strip().lower() or None
 
     for pattern, tool, action in PATTERNS:
         match = re.match(pattern, text)
