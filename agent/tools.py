@@ -117,6 +117,11 @@ class WeatherTool:
         return ToolResult(success=False, message=f"Unknown weather action: {action}")
 
     def _get_weather(self, city: str) -> ToolResult:
+        if not city or not city.strip():
+            return ToolResult(
+                success=False,
+                message="City name cannot be empty.",
+            )
         city_lower = city.lower()
         if city_lower not in self.WEATHER_DATA:
             return ToolResult(

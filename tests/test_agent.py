@@ -151,6 +151,23 @@ class TestWeatherTool:
         result = agent.process("weather in Atlantis")
         assert result.success is False
 
+    def test_weather_none_city(self):
+        """Passing None as city should return an error, not crash."""
+        from agent.tools import WeatherTool
+
+        tool = WeatherTool()
+        result = tool._get_weather(None)
+        assert result.success is False
+        assert "empty" in result.message.lower()
+
+    def test_weather_empty_city(self):
+        """Empty string city should return an error, not crash."""
+        from agent.tools import WeatherTool
+
+        tool = WeatherTool()
+        result = tool._get_weather("")
+        assert result.success is False
+
     def test_weather_data_keys(self):
         """The weather response data should use 'temp_c' to match
         the internal data model and documentation.
