@@ -53,7 +53,7 @@ class TodoTool:
         return ToolResult(success=False, message=f"Unknown todo action: {action}")
 
     def _add(self, title: str) -> ToolResult:
-        if not title:
+        if not title or not title.strip():
             return ToolResult(success=False, message="Todo title cannot be empty.")
         self.todos.append({"title": title, "done": False})
         return ToolResult(
