@@ -81,6 +81,15 @@ class TestTodoTool:
         assert result.success is True
         assert "buy milk" in result.message.lower()
 
+    def test_add_whitespace_only_todo(self):
+        """Whitespace-only titles should be rejected, not added as blank todos."""
+        from agent.tools import TodoTool
+
+        tool = TodoTool()
+        result = tool._add("   ")
+        assert result.success is False
+        assert tool.todos == []
+
     def test_list_empty(self):
         agent = Agent()
         result = agent.process("list todos")
