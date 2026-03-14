@@ -24,7 +24,8 @@ PATTERNS = [
     (r"list\s+todos?$", "todo", "list"),
     (r"delete\s+todo\s+(\d+)$", "todo", "delete"),
     (r"complete\s+todo\s+(\d+)$", "todo", "complete"),
-    (r"weather\s+(?:in\s+)?(.+)$", "weather", "get"),
+    (r"weather\s+in\s+(.+)$", "weather", "get"),
+    (r"weather\s+(?!in\s*$)(.+)$", "weather", "get"),
     (r"calc(?:ulate)?\s+(.+)$", "calculator", "evaluate"),
     (r"help$", "system", "help"),
 ]
