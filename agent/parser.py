@@ -44,11 +44,14 @@ def parse(user_input: str) -> Intent:
         return Intent(tool="system", action="unknown", raw_input=user_input or "")
 
     text = user_input.strip().lower()
+    original_text = user_input.strip()
 
     for pattern, tool, action in PATTERNS:
         match = re.match(pattern, text)
         if match:
-            groups = match.groups()
+            # Re-match against original text to preserve casing in captured groups
+            original_match = re.match(pattern, original_text, re.IGNORECASE)
+            groups = original_match.groups() if original_match else match.groups()
             arguments = {}
 
             if tool == "todo" and action == "add":

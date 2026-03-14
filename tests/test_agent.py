@@ -13,7 +13,7 @@ class TestParser:
         intent = parse("add todo Buy groceries")
         assert intent.tool == "todo"
         assert intent.action == "add"
-        assert intent.arguments["title"] == "buy groceries"
+        assert intent.arguments["title"] == "Buy groceries"
 
     def test_parse_list_todos(self):
         intent = parse("list todos")
@@ -36,7 +36,7 @@ class TestParser:
         intent = parse("weather in London")
         assert intent.tool == "weather"
         assert intent.action == "get"
-        assert intent.arguments["city"] == "london"
+        assert intent.arguments["city"] == "London"
 
     def test_parse_calculator(self):
         intent = parse("calc 2 + 3 * 4")
@@ -95,6 +95,14 @@ class TestParser:
         assert intent.tool == "system"
         assert intent.action == "unknown"
 
+    def test_parse_preserves_original_casing(self):
+        """Parser should preserve original casing in extracted arguments."""
+        todo_intent = parse("add todo Buy Groceries")
+        assert todo_intent.arguments["title"] == "Buy Groceries"
+
+        weather_intent = parse("weather in New York")
+        assert weather_intent.arguments["city"] == "New York"
+
 
 class TestTodoTool:
     """Tests for the to-do tool."""
@@ -143,7 +151,7 @@ class TestTodoTool:
         remaining = agent.process("list todos")
         assert len(remaining.data["todos"]) == 1
         # After deleting 'First', only 'Second' should remain
-        assert remaining.data["todos"][0]["title"] == "second"
+        assert remaining.data["todos"][0]["title"] == "Second"
 
     def test_complete_todo(self):
         agent = Agent()
