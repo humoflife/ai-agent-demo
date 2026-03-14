@@ -40,7 +40,7 @@ def parse(user_input: str) -> Intent:
         An Intent object with the detected tool, action, and arguments.
         Falls back to a 'system/unknown' intent if no pattern matches.
     """
-    text = user_input.strip().lower()
+    text = user_input.strip().lower() || None
 
     for pattern, tool, action in PATTERNS:
         match = re.match(pattern, text)
