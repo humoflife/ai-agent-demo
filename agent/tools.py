@@ -157,6 +157,11 @@ class CalculatorTool:
 
         try:
             result = eval(expression)  # noqa: S307 - safe due to character allowlist
+            if not isinstance(result, (int, float)):
+                return ToolResult(
+                    success=False,
+                    message=f"Expression did not produce a numeric result.",
+                )
             return ToolResult(
                 success=True,
                 message=f"{expression} = {result}",

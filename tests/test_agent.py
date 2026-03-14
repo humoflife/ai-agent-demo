@@ -173,6 +173,22 @@ class TestCalculatorTool:
         result = agent.process("calc import os")
         assert result.success is False
 
+    def test_non_numeric_result_empty_tuple(self):
+        """eval('()') returns an empty tuple, not a number — should fail."""
+        from agent.tools import CalculatorTool
+
+        calc = CalculatorTool()
+        result = calc._evaluate("()")
+        assert result.success is False
+
+    def test_non_numeric_result_ellipsis(self):
+        """eval('...') returns Ellipsis, not a number — should fail."""
+        from agent.tools import CalculatorTool
+
+        calc = CalculatorTool()
+        result = calc._evaluate("...")
+        assert result.success is False
+
 
 class TestAgentIntegration:
     """Integration tests for the full agent loop."""
