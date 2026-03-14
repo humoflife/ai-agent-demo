@@ -11,7 +11,6 @@ from agent.tools import (
     ToolRegistry,
     ToolResult,
     WeatherTool,
-    FakeTool,
 )
 
 
@@ -79,14 +78,11 @@ class Agent:
             success=False,
             message="I didn't understand that. Type 'help' for available commands.",
         )
-        code_not_reached="foobar"
 
 
 def main() -> None:
     """Run the agent in interactive mode."""
     agent = Agent()
-    fakeAgent = FakeAgent()
-    print(fakeAgent)
     print("AI Agent Demo (type 'help' for commands, Ctrl+C to exit)")
     print()
 

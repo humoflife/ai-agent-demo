@@ -13,7 +13,6 @@ class ToolResult:
 
     success: bool
     message: str
-    whosthat: object
     data: dict = field(default_factory=dict)
 
 
