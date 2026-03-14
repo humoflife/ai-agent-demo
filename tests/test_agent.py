@@ -54,6 +54,18 @@ class TestParser:
         assert intent.tool == "system"
         assert intent.action == "unknown"
 
+    def test_parse_empty_input(self):
+        """Empty and whitespace-only input should return unknown intent, not crash."""
+        intent = parse("")
+        assert intent.tool == "system"
+        assert intent.action == "unknown"
+
+    def test_parse_whitespace_only(self):
+        """Whitespace-only input should return unknown intent, not crash."""
+        intent = parse("   ")
+        assert intent.tool == "system"
+        assert intent.action == "unknown"
+
 
 class TestTodoTool:
     """Tests for the to-do tool."""
