@@ -20,12 +20,12 @@ class Intent:
 
 # Keyword patterns mapped to (tool, action) pairs
 PATTERNS = [
-    (r"add\s+todo\s+(.+)", "todo", "add"),
-    (r"list\s+todos?", "todo", "list"),
-    (r"delete\s+todo\s+(\d+)", "todo", "delete"),
-    (r"complete\s+todo\s+(\d+)", "todo", "complete"),
-    (r"weather\s+(?:in\s+)?(.+)", "weather", "get"),
-    (r"calc(?:ulate)?\s+(.+)", "calculator", "evaluate"),
+    (r"add\s+todo\s+(.+)$", "todo", "add"),
+    (r"list\s+todos?$", "todo", "list"),
+    (r"delete\s+todo\s+(\d+)$", "todo", "delete"),
+    (r"complete\s+todo\s+(\d+)$", "todo", "complete"),
+    (r"weather\s+(?:in\s+)?(.+)$", "weather", "get"),
+    (r"calc(?:ulate)?\s+(.+)$", "calculator", "evaluate"),
     (r"help$", "system", "help"),
 ]
 

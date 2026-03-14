@@ -77,6 +77,24 @@ class TestParser:
         assert intent.tool == "system"
         assert intent.action == "unknown"
 
+    def test_parse_list_todos_no_suffix_match(self):
+        """'list todosomething' should not trigger the list action."""
+        intent = parse("list todosomething")
+        assert intent.tool == "system"
+        assert intent.action == "unknown"
+
+    def test_parse_delete_todo_trailing_text(self):
+        """'delete todo 1 extra stuff' should not match the delete pattern."""
+        intent = parse("delete todo 1 extra stuff")
+        assert intent.tool == "system"
+        assert intent.action == "unknown"
+
+    def test_parse_complete_todo_trailing_text(self):
+        """'complete todo 1 and more' should not match the complete pattern."""
+        intent = parse("complete todo 1 and more")
+        assert intent.tool == "system"
+        assert intent.action == "unknown"
+
 
 class TestTodoTool:
     """Tests for the to-do tool."""
