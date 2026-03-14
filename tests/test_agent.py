@@ -54,6 +54,12 @@ class TestParser:
         assert intent.tool == "system"
         assert intent.action == "unknown"
 
+    def test_parse_help_prefix_no_match(self):
+        """Words starting with 'help' (e.g. 'helpful') should not trigger help."""
+        intent = parse("helpful hints")
+        assert intent.tool == "system"
+        assert intent.action == "unknown"
+
 
 class TestTodoTool:
     """Tests for the to-do tool."""
