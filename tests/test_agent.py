@@ -102,7 +102,19 @@ class TestParser:
 
         weather_intent = parse("weather in New York")
         assert weather_intent.arguments["city"] == "New York"
+        
+    def test_parse_weather_in_without_city(self):
+        """'weather in' with no city should not match as a weather query."""
+        intent = parse("weather in")
+        assert intent.tool == "system"
+        assert intent.action == "unknown"
 
+    def test_parse_weather_without_in_prefix(self):
+        """'weather london' (without 'in') should still match."""
+        intent = parse("weather london")
+        assert intent.tool == "weather"
+        assert intent.action == "get"
+        assert intent.arguments["city"] == "london"
 
 class TestTodoTool:
     """Tests for the to-do tool."""
