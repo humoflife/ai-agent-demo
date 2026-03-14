@@ -54,6 +54,7 @@ class TestParser:
         assert intent.tool == "system"
         assert intent.action == "unknown"
 
+
     def test_parse_empty_input(self):
         """Empty and whitespace-only input should return unknown intent, not crash."""
         intent = parse("")
@@ -63,6 +64,10 @@ class TestParser:
     def test_parse_whitespace_only(self):
         """Whitespace-only input should return unknown intent, not crash."""
         intent = parse("   ")
+
+    def test_parse_help_prefix_no_match(self):
+        """Words starting with 'help' (e.g. 'helpful') should not trigger help."""
+        intent = parse("helpful hints")
         assert intent.tool == "system"
         assert intent.action == "unknown"
 
