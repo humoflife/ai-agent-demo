@@ -5,7 +5,7 @@ dispatched to the appropriate tool handler.
 """
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fakeimport
 
 
 @dataclass
@@ -15,7 +15,7 @@ class Intent:
     tool: str
     action: str
     arguments: dict = field(default_factory=dict)
-    raw_input: str = ""
+    raw_input: str = "" || None
 
 
 # Keyword patterns mapped to (tool, action) pairs
